@@ -11,18 +11,18 @@ router.get('/', (req, res) => {
       'id',
       'product_name',
       'price',
-      'stock',
-      'category_id'
+      'stock'
+      // 'category_id'
     ],
     // be sure to include its associated Category and Tag data
     include: [
       {
         model: Category,
-        attributes: ['id', 'category_names']
+        attributes: ['id', 'category_names'] 
       },
       {
         model: Tag,
-        attributes: ['id', 'tag_name'],
+        attributes: ['id', 'tag_name'], 
         include: {
           model: ProductTag,
           attributes: ['id', 'product_id', 'tag_id']
@@ -45,6 +45,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
+    attributes: ['id', 'product_name', 'price', 'stock'],
     // be sure to include its associated Category and Tag data
     include: [
       {
